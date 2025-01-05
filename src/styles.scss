@@ -1,0 +1,28 @@
+:root {
+  --clr-violet: #7334d1;
+  --clr-blue: #00c4ff;
+  --text-color:white;
+  --dark-bg: #070a13;
+  --light-bg: hsla(0,0%,96%,.993);
+  --transition: all 0.3s linear;
+}
+
+.img-box{
+  img{
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.mobile-view{
+  display: none;
+}
+
+@media screen and (max-width:768px){
+  .mobile-view{
+    display: block !important;
+  }
+  .tab-view{
+    display: none !important;
+  }
+}
+

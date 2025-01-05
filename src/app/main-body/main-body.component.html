@@ -1,0 +1,42 @@
+<section class="main-body">
+
+  <!-- mobile-nav -->
+  <section class="mobile-nav mobile-view">
+   <nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid nav-bar-section">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body ">
+          <ul class="navbar-nav h-100 d-flex flex-column justify-content-around">
+            <li class="nav-item" *ngFor="let title of navTitles;">
+              <button class="nav-btns mx-auto d-block fw-semibold" > {{ title }} </button>
+            </li>
+           </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  </section>
+
+<!--   tab-lap-content -->
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col-3 tab-view border h-100">
+        <div class="nav-bar-section h-100 d-flex flex-column justify-content-around">
+          <button class="nav-btns mx-auto d-block fw-semibold" *ngFor="let title of navTitles;"> {{ title }} </button>
+        </div>
+      </div>
+      <div class="col-md-9 col-12 border">
+        <div class="body-content">
+          <app-home></app-home>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
