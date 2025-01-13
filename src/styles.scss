@@ -1,28 +1,32 @@
 :root {
   --clr-violet: #7334d1;
   --clr-blue: #00c4ff;
-  --text-color:white;
+  --text-color: white;
   --dark-bg: #070a13;
-  --light-bg: hsla(0,0%,96%,.993);
-  --transition: all 0.3s linear;
+  --light-bg: hsla(0, 0%, 96%, 0.993);
+  --transitions: all 0.3s linear;
 }
-
-.img-box{
-  img{
+.cursor-pointer {
+  cursor: pointer;
+}
+.straight-line {
+  white-space: nowrap;
+}
+.img-box {
+  img {
     width: 100%;
     object-fit: cover;
   }
 }
-.mobile-view{
+.mobile-view {
   display: none;
 }
 
-@media screen and (max-width:768px){
-  .mobile-view{
+@media screen and (max-width: 768px) {
+  .mobile-view {
     display: block !important;
   }
-  .tab-view{
+  .tab-view {
     display: none !important;
   }
 }
-
