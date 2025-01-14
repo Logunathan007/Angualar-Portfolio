@@ -131,11 +131,11 @@
       padding: 4%;
       gap: 70px 120px;
       .skill {
-        width: 100px;
+        width: 80px;
         img {
           transition: var(--transitions);
           &:hover {
-            transform: translateY(10px);
+            transform: translateY(-20px);
           }
         }
       }
@@ -186,16 +186,7 @@
     }
   }
 }
-::-webkit-scrollbar {
-  height: 5px;
-} /* track */
-::-webkit-scrollbar-track {
-  background: none;
-} /* handle */
-::-webkit-scrollbar-thumb {
-  background: #e7e9ee;
-  border-radius: 4px;
-}
+
 @keyframes animate {
   50% {
     filter: hue-rotate(360deg);

@@ -45,24 +45,29 @@
 
 <!--   tab-lap-content -->
 <div class="tab-view nav" [class.closeNav]="!isNavOpen">
-  <div class="row w-100">
+  <div class="d-flex w-100">
     <div class="left-box">
       <div
         class="nav-bar-section h-100 d-flex flex-column justify-content-around align-items-center"
       >
-        <button class="nav-btns" *ngFor="let title of navTitles">
-          <h4 class="fw-bolder mb-0" *ngIf="isNavOpen">
-            {{ title.name }}
-          </h4>
-          <h4 class="fw-bolder mb-0" *ngIf="!isNavOpen">
-            <img
-              height="30px"
-              class="image-color"
-              [src]="'/assets/icons/' + title.icon"
-              alt=""
-            />
-          </h4>
-        </button>
+        <ng-container *ngFor="let title of navTitles; let i = index">
+          <button
+            class="nav-btns"
+            (click)="updateSection(i)"
+            [class.active]="currentSection === i"
+          >
+            <h4 class="fw-bolder mb-0">
+              {{ isNavOpen ? title.name : "" }}
+              <img
+                *ngIf="!isNavOpen"
+                height="30px"
+                class="image-color"
+                [src]="'/assets/icons/' + title.icon"
+                alt=""
+              />
+            </h4>
+          </button>
+        </ng-container>
       </div>
       <div
         class="arrow-box cursor-pointer d-flex align-items-center justify-content-center"
@@ -75,7 +80,7 @@
         />
       </div>
     </div>
-    <div class="right-box">
+    <div class="right-box" (scroll)="updateScroll()">
       <app-main-body></app-main-body>
     </div>
   </div>

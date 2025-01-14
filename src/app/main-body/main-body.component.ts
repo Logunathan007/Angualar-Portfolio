@@ -4,9 +4,14 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnDestroy,
   OnInit,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
+import { CommonService } from '../shared/services/common.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main-body',
@@ -15,12 +20,26 @@ import {
   templateUrl: './main-body.component.html',
   styleUrls: ['./main-body.component.scss'],
 })
-export class MainBodyComponent implements OnInit, AfterViewInit {
+export class MainBodyComponent implements OnInit, AfterViewInit, OnDestroy {
   //Resume Button Variables
   @ViewChild('resButton') buttonRef!: ElementRef<HTMLButtonElement>;
   buttonObj!: HTMLButtonElement;
   left = 0;
   top = 0;
+
+  //deactivateCheck
+  deactivateCheck: boolean = false;
+
+  //cursor subject
+  cursorSubject!: Subscription;
+
+  //section subject
+  sectionSubject!: Subscription;
+
+  //update section
+  @ViewChildren('section')
+  sectionList!: QueryList<ElementRef>;
+  currentSection: number = 0;
 
   //Skills list
   skillsList = [
@@ -74,6 +93,7 @@ export class MainBodyComponent implements OnInit, AfterViewInit {
     },
   ];
 
+  //Projects list
   projectsList = [
     {
       name: 'DOB Alert',
@@ -113,18 +133,67 @@ export class MainBodyComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  ngOnInit(): void {}
+  constructor(private commonService: CommonService) {}
+
+  ngOnInit(): void {
+    // console.log('on init');
+    this.subscribeAllService();
+  }
 
   ngAfterViewInit(): void {
     if (this.buttonRef) {
       this.buttonObj = this.buttonRef.nativeElement;
-      this.updateButtonPosition();
+      setTimeout(() => {
+        this.updateButtonPosition();
+      }, 500);
     }
+  }
 
-    const homeSection = document.getElementById('home');
-    if (homeSection) {
-      new ResizeObserver(this.updateButtonPosition).observe(homeSection);
-    }
+  ngOnDestroy(): void {
+    this.unSubscribeAllService();
+  }
+
+  subscribeAllService() {
+    this.cursorSubject = this.commonService.$updateCursor.subscribe(
+      (val: boolean) => {
+        this.updateButtonPosition();
+        this.checkScrollSection();
+      }
+    );
+
+    this.sectionSubject = this.commonService.$updateSelectedSection.subscribe(
+      (ind: number) => {
+        this.currentSection = ind;
+        this.gotoSection(ind);
+      }
+    );
+  }
+
+  gotoSection(ind: number) {
+    this.sectionList
+      ?.get(ind)
+      ?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  checkScrollSection() {
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
+    this.sectionList?.forEach((section: ElementRef, ind: number) => {
+      const rect = section.nativeElement.getBoundingClientRect();
+      const top = rect.top + window.scrollY;
+      const bottom = top + rect.height;
+
+      if (scrollPosition >= top && scrollPosition <= bottom) {
+        if (this.currentSection !== ind) {
+          this.currentSection = ind;
+          this.commonService.$updateSelectedSection.next(ind);
+        }
+      }
+    });
+  }
+
+  unSubscribeAllService() {
+    this.cursorSubject && this.cursorSubject.unsubscribe();
+    this.sectionSubject && this.sectionSubject.unsubscribe();
   }
 
   updateButtonPosition = () => {
@@ -139,16 +208,9 @@ export class MainBodyComponent implements OnInit, AfterViewInit {
     if (this.buttonObj) {
       this.applyTransformEffect(event.clientX, event.clientY);
     }
-    console.log('mouse move', this.left, this.top);
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: any) {
-    this.updateButtonPosition();
-    console.log('onScroll ', this.left, this.top);
-  }
-
-  private applyTransformEffect(mouseX: number, mouseY: number) {
+  applyTransformEffect(mouseX: number, mouseY: number) {
     if (!this.buttonObj) return;
 
     const radius = Math.max(
@@ -174,12 +236,7 @@ export class MainBodyComponent implements OnInit, AfterViewInit {
     }px rgba(0,0,0,0.15)`;
   }
 
-  private distanceBetween(
-    p1x: number,
-    p1y: number,
-    p2x: number,
-    p2y: number
-  ): number {
+  distanceBetween(p1x: number, p1y: number, p2x: number, p2y: number): number {
     const dx = p1x - p2x;
     const dy = p1y - p2y;
     return Math.sqrt(dx * dx + dy * dy);

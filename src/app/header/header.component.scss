@@ -1,10 +1,16 @@
 .nav-btns {
-  background-color: var(--clr-blue);
-  color: var(--clr-violet);
+  background-color: transparent;
+  color: var(--light-bg);
   width: 70%;
   border: none;
   border-radius: 8px;
-  padding: 5% 5%;
+  h4 {
+    padding: 5% 0%;
+  }
+  &.active {
+    color: var(--dark-bg) !important;
+    background-color: var(--clr-blue) !important;
+  }
 }
 
 .mobile-view.nav {
@@ -90,4 +96,15 @@
       width: 92%;
     }
   }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+} /* track */
+::-webkit-scrollbar-track {
+  background: none;
+} /* handle */
+::-webkit-scrollbar-thumb {
+  background: var(--clr-blue);
+  border-radius: 4px;
 }
