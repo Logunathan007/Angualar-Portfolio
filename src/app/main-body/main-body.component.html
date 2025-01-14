@@ -1,4 +1,4 @@
-<section class="main-section" (scroll)="onScroll()">
+<section class="main-section" (scroll)="onScroll($event)">
   <div class="home-section container" id="home">
     <div class="row">
       <div class="col-md-4 col-12">
@@ -41,7 +41,7 @@
               <h4 class="fw-bold mb-4">Karpagam Institue of Technology</h4>
               <h5>
                 B.E Electronics and Communication Engineering
-                <span class="straight-line"> (Jun-2020 to Man-2024) </span>
+                <span class="straight-line"> (Jun-2020 to May-2024) </span>
               </h5>
               <h5>CGPA : 8</h5>
             </div>
@@ -62,7 +62,7 @@
       </div>
     </div>
   </div>
-  <div class="experience-section container">
+  <div class="experience-section container" id="experience">
     <h1 class="text-center title">EXPERIENCE</h1>
     <div class="row">
       <div class="col-md-5 col-12">
@@ -88,7 +88,7 @@
       </div>
     </div>
   </div>
-  <div class="skills-section container">
+  <div class="skills-section container" id="skills">
     <h1 class="text-center title">SKILLS</h1>
     <div
       class="skills-list d-flex justify-content-center align-items-center flex-wrap"
@@ -101,7 +101,7 @@
       </div>
     </div>
   </div>
-  <div class="project-section container">
+  <div class="project-section container" id="projects">
     <h1 class="title text-center">Projects</h1>
     <ng-container
       *ngFor="let i of projectsList; let isOdd = odd; let isEven = even"
@@ -130,7 +130,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="contact-section container">
+  <div class="contact-section container" id="contact">
     <h1 class="title text-center">CONTACT</h1>
     <div class="row">
       <div class="col-md-6 col-12">

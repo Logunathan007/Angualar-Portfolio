@@ -11,13 +11,14 @@ import { MainBodyComponent } from '../main-body/main-body.component';
 export class HeaderComponent {
   isNavOpen = true;
   navTitles = [
-    'ABOUT',
-    'EDUCATIOIN',
-    'EXPERIENCE',
-    'SKILLS',
-    'PROJECTS',
-    'CONTACT',
+    { name: 'ABOUT', icon: 'about.png' },
+    { name: 'EDUCATIOIN', icon: 'education.png' },
+    { name: 'EXPERIENCE', icon: 'experience.png' },
+    { name: 'SKILLS', icon: 'skills.png' },
+    { name: 'PROJECTS', icon: 'projects.png' },
+    { name: 'CONTACT', icon: 'contact.png' },
   ];
+
   toggleNav() {
     this.isNavOpen = !this.isNavOpen;
   }

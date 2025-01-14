@@ -119,7 +119,6 @@ export class MainBodyComponent implements OnInit, AfterViewInit {
     if (this.buttonRef) {
       this.buttonObj = this.buttonRef.nativeElement;
       this.updateButtonPosition();
-      // console.log('Obj', this.buttonObj);
     }
 
     const homeSection = document.getElementById('home');
@@ -140,11 +139,13 @@ export class MainBodyComponent implements OnInit, AfterViewInit {
     if (this.buttonObj) {
       this.applyTransformEffect(event.clientX, event.clientY);
     }
-    // console.log(this.left, this.top);
+    console.log('mouse move', this.left, this.top);
   }
 
-  onScroll() {
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: any) {
     this.updateButtonPosition();
+    console.log('onScroll ', this.left, this.top);
   }
 
   private applyTransformEffect(mouseX: number, mouseY: number) {

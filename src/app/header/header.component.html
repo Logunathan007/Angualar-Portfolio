@@ -32,7 +32,7 @@
           >
             <li class="nav-item" *ngFor="let title of navTitles">
               <button class="nav-btns mx-auto d-block fw-semibold">
-                {{ title }}
+                {{ title.name }}
               </button>
             </li>
           </ul>
@@ -40,6 +40,7 @@
       </div>
     </div>
   </nav>
+  <app-main-body></app-main-body>
 </section>
 
 <!--   tab-lap-content -->
@@ -49,13 +50,32 @@
       <div
         class="nav-bar-section h-100 d-flex flex-column justify-content-around align-items-center"
       >
-        <button class="nav-btns fw-semibold" *ngFor="let title of navTitles">
-          {{ isNavOpen ? title : "" }}
+        <button class="nav-btns" *ngFor="let title of navTitles">
+          <h4 class="fw-bolder mb-0" *ngIf="isNavOpen">
+            {{ title.name }}
+          </h4>
+          <h4 class="fw-bolder mb-0" *ngIf="!isNavOpen">
+            <img
+              height="30px"
+              class="image-color"
+              [src]="'/assets/icons/' + title.icon"
+              alt=""
+            />
+          </h4>
         </button>
       </div>
-      <div class="arrow-box cursor-pointer" (click)="toggleNav()"></div>
+      <div
+        class="arrow-box cursor-pointer d-flex align-items-center justify-content-center"
+        (click)="toggleNav()"
+      >
+        <img
+          [class.reverse]="!isNavOpen"
+          src="/assets/icons/arrow-left-solid.svg"
+          alt=""
+        />
+      </div>
     </div>
-    <div class="right-box col-12">
+    <div class="right-box">
       <app-main-body></app-main-body>
     </div>
   </div>
