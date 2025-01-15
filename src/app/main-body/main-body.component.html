@@ -1,5 +1,5 @@
 <section class="main-section">
-  <div class="home-section container" #section id="home">
+  <div class="home-section container" #section id="0">
     <div class="row">
       <div class="col-md-4 col-12">
         <div class="img-box border">
@@ -8,15 +8,15 @@
       </div>
       <div class="col-md-8 col-12" (mousemove)="onMouseMove($event)">
         <div class="home-content">
-          <h1 class="fw-bold text-center name">LOGUNATHAN J</h1>
+          <h1 class="fw-bold text-center name title border-0">LOGUNATHAN J</h1>
           <h1 class="role">Software Developer</h1>
-          <p>
+          <h5>
             Dynamic and versatile software developer with proficiency in HTML,
             CSS, JavaScript, ReactJS, C, Java, Python, and SQL. Possessing a
             solid foundation in computer science principles and programming
             languages, I am adept at developing and implementing efficient
             solutions to complex problems.
-          </p>
+          </h5>
           <div class="button button-wrapper">
             <a
               target="_blank"
@@ -31,9 +31,9 @@
       </div>
     </div>
   </div>
-  <div class="education-section container" #section id="education">
+  <div class="education-section container" #section id="1">
     <h1 class="text-center title">EDUCATION</h1>
-    <div class="row">
+    <div class="row row-gap-3">
       <div class="col-md-7 col-12">
         <div class="education-cards">
           <div class="edu-card-design">
@@ -62,9 +62,9 @@
       </div>
     </div>
   </div>
-  <div class="experience-section container" #section id="experience">
+  <div class="experience-section container" #section id="2">
     <h1 class="text-center title">EXPERIENCE</h1>
-    <div class="row">
+    <div class="row row-gap-3">
       <div class="col-md-5 col-12">
         <div class="img-box">
           <img src="/assets/pictures/Experience.jpg" alt="" />
@@ -88,7 +88,7 @@
       </div>
     </div>
   </div>
-  <div class="skills-section container" #section id="skills">
+  <div class="skills-section container" #section id="3">
     <h1 class="text-center title">SKILLS</h1>
     <div
       class="skills-list d-flex justify-content-center align-items-center flex-wrap"
@@ -101,12 +101,15 @@
       </div>
     </div>
   </div>
-  <div class="project-section container" #section id="projects">
+  <div class="project-section container" #section id="4">
     <h1 class="title text-center">Projects</h1>
     <ng-container
       *ngFor="let i of projectsList; let isOdd = odd; let isEven = even"
     >
-      <div class="row project-card" *ngIf="isOdd">
+      <div
+        class="row row-gap-3 project-card"
+        [ngClass]="{ 'flex-row-reverse': isOdd }"
+      >
         <div class="col-md-5 col-12">
           <div class="img-box">
             <img [src]="'/assets/pictures/' + i.imgLink" alt="" />
@@ -115,24 +118,13 @@
         <div class="col-md-7 col-12 project-content">
           <h3 class="mb-3" routerLink="">{{ i.name }}</h3>
           <p routerLink="">{{ i.description }}</p>
-        </div>
-      </div>
-      <div class="row project-card" *ngIf="isEven">
-        <div class="col-md-7 col-12 project-content">
-          <h3 class="mb-3" routerLink="">{{ i.name }}</h3>
-          <p routerLink="">{{ i.description }}</p>
-        </div>
-        <div class="col-md-5 col-12">
-          <div class="img-box">
-            <img [src]="'/assets/pictures/' + i.imgLink" alt="" />
-          </div>
         </div>
       </div>
     </ng-container>
   </div>
-  <div class="contact-section container" #section id="contact">
+  <div class="contact-section container" #section id="5">
     <h1 class="title text-center">CONTACT</h1>
-    <div class="row">
+    <div class="row row-gap-3">
       <div class="col-md-6 col-12">
         <p>Feel free to reach out for collaborations or just to say hi!</p>
         <div class="links">

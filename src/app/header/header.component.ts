@@ -1,5 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Renderer2,
+  ViewChildren,
+} from '@angular/core';
 import { MainBodyComponent } from '../main-body/main-body.component';
 import { CommonService } from '../shared/services/common.service';
 import { Subscription } from 'rxjs';
@@ -31,13 +40,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeAllService();
   }
+
   ngOnDestroy(): void {
     this.unSubscribeAllService();
   }
   subscribeAllService() {
     this.sectionSubject = this.commonService.$updateSelectedSection.subscribe(
       (val: number) => {
-        this.currentSection = val;
+        if (val != this.currentSection) this.currentSection = val;
       }
     );
   }
@@ -48,11 +58,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isNavOpen = !this.isNavOpen;
     setTimeout(() => {
       this.commonService.$updateCursor.next(true);
-    }, 1000);
+    }, 500);
   }
 
   updateScroll() {
-    // console.log('check scrolling');
     this.commonService.$updateCursor.next(true);
   }
 

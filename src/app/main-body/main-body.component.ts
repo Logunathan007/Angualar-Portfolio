@@ -3,7 +3,6 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   OnDestroy,
   OnInit,
   QueryList,
@@ -172,7 +171,7 @@ export class MainBodyComponent implements OnInit, AfterViewInit, OnDestroy {
   gotoSection(ind: number) {
     this.sectionList
       ?.get(ind)
-      ?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      ?.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 
   checkScrollSection() {

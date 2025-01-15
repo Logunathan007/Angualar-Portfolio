@@ -1,6 +1,6 @@
 <!-- mobile-nav -->
 <section class="mobile-view nav">
-  <nav class="navbar bg-body-tertiary fixed-top">
+  <nav class="navbar fixed-top">
     <div class="container-fluid nav-bar-section">
       <button
         class="navbar-toggler"
@@ -10,10 +10,10 @@
         aria-controls="offcanvasNavbar"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <img src="/assets/icons/menu.png" alt="" />
       </button>
       <div
-        class="offcanvas offcanvas-end"
+        class="offcanvas offcanvas-end w-100"
         tabindex="-1"
         id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel"
@@ -21,18 +21,34 @@
         <div class="offcanvas-header">
           <button
             type="button"
-            class="btn-close"
+            class="close-btn"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
-          ></button>
+          >
+            <img src="/assets/icons/close.png" alt="" />
+          </button>
         </div>
         <div class="offcanvas-body">
           <ul
             class="navbar-nav h-100 d-flex flex-column justify-content-around"
           >
-            <li class="nav-item" *ngFor="let title of navTitles">
-              <button class="nav-btns mx-auto d-block fw-semibold">
-                {{ title.name }}
+            <li class="nav-item" *ngFor="let title of navTitles; let i = index">
+              <button
+                class="nav-btns mx-auto d-flex"
+                (click)="updateSection(i)"
+                [class.active]="currentSection === i"
+                aria-label="Close"
+                data-bs-dismiss="offcanvas"
+              >
+                <h4 class="fw-bolder mb-0">
+                  <img
+                    height="30px"
+                    class="image-color"
+                    [src]="'/assets/icons/' + title.icon"
+                    alt=""
+                  />
+                  {{ isNavOpen ? title.name : "" }}
+                </h4>
               </button>
             </li>
           </ul>
@@ -57,14 +73,13 @@
             [class.active]="currentSection === i"
           >
             <h4 class="fw-bolder mb-0">
-              {{ isNavOpen ? title.name : "" }}
               <img
-                *ngIf="!isNavOpen"
                 height="30px"
                 class="image-color"
                 [src]="'/assets/icons/' + title.icon"
                 alt=""
               />
+              {{ isNavOpen ? title.name : "" }}
             </h4>
           </button>
         </ng-container>

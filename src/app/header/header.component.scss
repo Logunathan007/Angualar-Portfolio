@@ -6,23 +6,54 @@
   border-radius: 8px;
   h4 {
     padding: 5% 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    img {
+      filter: brightness(0) invert(1);
+    }
   }
   &.active {
     color: var(--dark-bg) !important;
     background-color: var(--clr-blue) !important;
+    img {
+      filter: unset !important;
+    }
   }
 }
 
 .mobile-view.nav {
   background-color: var(--dark-bg);
   color: var(--text-color);
+  --bs-offcanvas-width: 100%;
   .navbar {
+    background-color: var(--dark-bg);
     position: sticky;
     top: 0;
     right: 0;
     left: 0;
     z-index: 1030;
-    background: transparent;
+    .navbar-toggler {
+      display: grid;
+      place-items: center;
+      border: none;
+      img {
+        width: 30px;
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+  .offcanvas {
+    background-color: var(--dark-bg);
+    .close-btn {
+      background: transparent;
+      border: none;
+      img {
+        width: 30px;
+        filter: brightness(0) invert(1);
+      }
+    }
   }
 }
 
