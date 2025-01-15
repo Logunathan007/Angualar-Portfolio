@@ -11,11 +11,14 @@
           <h1 class="fw-bold text-center name title border-0">LOGUNATHAN J</h1>
           <h1 class="role">Software Developer</h1>
           <h5>
-            Dynamic and versatile software developer with proficiency in HTML,
-            CSS, JavaScript, ReactJS, C, Java, Python, and SQL. Possessing a
-            solid foundation in computer science principles and programming
-            languages, I am adept at developing and implementing efficient
-            solutions to complex problems.
+            Dynamic and versatile software developer proficient in HTML, CSS,
+            JavaScript, TypeScript, React, Angular, C, C#, Java, Python, Flask,
+            .NET, and SQL. With a strong foundation in computer science,
+            including Object-Oriented Programming (OOP) and Data Structures and
+            Algorithms (DSA), I excel in crafting efficient solutions for
+            complex problems across both front-end and back-end development. I
+            am committed to writing clean, maintainable code and adapting
+            quickly to new technologies and frameworks.
           </h5>
           <div class="button button-wrapper">
             <a
@@ -65,12 +68,12 @@
   <div class="experience-section container" #section id="2">
     <h1 class="text-center title">EXPERIENCE</h1>
     <div class="row row-gap-3">
-      <div class="col-md-5 col-12">
+      <div class="col-md-5 col-12 d-flex align-items-center">
         <div class="img-box">
           <img src="/assets/pictures/Experience.jpg" alt="" />
         </div>
       </div>
-      <div class="col-md-7 col-12">
+      <div class="col-md-7 col-12 d-flex align-items-center">
         <div class="experience-content">
           <h1 class="fw-bold">Junior Developer</h1>
           <div class="img-box">
@@ -110,23 +113,32 @@
         class="row row-gap-3 project-card"
         [ngClass]="{ 'flex-row-reverse': isOdd }"
       >
-        <div class="col-md-5 col-12">
+        <div class="col-md-5 col-12 project-image-box">
           <div class="img-box">
             <img [src]="'/assets/pictures/' + i.imgLink" alt="" />
           </div>
         </div>
         <div class="col-md-7 col-12 project-content">
-          <h3 class="mb-3" routerLink="">{{ i.name }}</h3>
-          <p routerLink="">{{ i.description }}</p>
+          <h3 class="mb-md-3 mb-2">{{ i.name }}</h3>
+          <h6 class="fw-lighter" style="line-height: 1.5" routerLink="">
+            {{ i.description }}
+          </h6>
         </div>
       </div>
     </ng-container>
   </div>
   <div class="contact-section container" #section id="5">
     <h1 class="title text-center">CONTACT</h1>
-    <div class="row row-gap-3">
-      <div class="col-md-6 col-12">
-        <p>Feel free to reach out for collaborations or just to say hi!</p>
+    <div class="row row-gap-3 flex-md-row flex-column-reverse">
+      <div
+        class="col-md-6 col-12 d-flex row-gap-4 flex-column justify-content-center align-items-center"
+      >
+        <h4
+          class="fw-lighter pt-md-5 pt-0 text-center"
+          style="line-height: 1.5"
+        >
+          Feel free to reach out for collaborations or just to say hi!
+        </h4>
         <div class="links">
           <a
             href="https://www.linkedin.com/in/logu-nj/"

@@ -28,7 +28,6 @@
   color: var(--text-color);
   --bs-offcanvas-width: 100%;
   .navbar {
-    background-color: var(--dark-bg);
     position: sticky;
     top: 0;
     right: 0;
@@ -38,6 +37,11 @@
       display: grid;
       place-items: center;
       border: none;
+      &:focus,
+      &:focus-visible {
+        box-shadow: none;
+        outline: none;
+      }
       img {
         width: 30px;
         filter: brightness(0) invert(1);
@@ -98,17 +102,17 @@
       z-index: 2;
       background-color: var(--dark-bg);
       right: 0%;
-      transform: translateX(60%);
+      transform: translateX(56%);
       width: 40px;
       height: 40px;
       border: 5px solid white;
+      transition: var(--transitions);
+      &.reverse {
+        transform: rotateZ(-180deg) translateX(-56%);
+      }
       img {
         width: 20px;
-        transition: var(--transitions);
         filter: brightness(1) invert(1);
-        &.reverse {
-          rotate: -180deg;
-        }
       }
     }
   }

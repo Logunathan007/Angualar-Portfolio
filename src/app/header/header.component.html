@@ -87,12 +87,9 @@
       <div
         class="arrow-box cursor-pointer d-flex align-items-center justify-content-center"
         (click)="toggleNav()"
+        [class.reverse]="!isNavOpen"
       >
-        <img
-          [class.reverse]="!isNavOpen"
-          src="/assets/icons/arrow-left-solid.svg"
-          alt=""
-        />
+        <img src="/assets/icons/arrow-left-solid.svg" alt="" />
       </div>
     </div>
     <div class="right-box" (scroll)="updateScroll()">
