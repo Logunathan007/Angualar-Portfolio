@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   //subject
   sectionSubject!: Subscription;
 
-  constructor(public commonService: CommonService) {}
+  constructor(public commonService: CommonService) { }
   ngOnInit(): void {
     this.subscribeAllService();
   }
@@ -62,10 +62,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   updateScroll() {
-    this.commonService.$updateCursor.next(true);
+    if (this.commonService.handleScroll) {
+      this.commonService.$updateCursor.next(true);
+    }
   }
 
   updateSection(index: number) {
+    this.commonService.handleScroll = false;
     this.commonService.$updateSelectedSection.next(index);
   }
 }

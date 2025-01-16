@@ -10,7 +10,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { CommonService } from '../shared/services/common.service';
-import { Subscription } from 'rxjs';
+import { map, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-main-body',
@@ -132,7 +132,7 @@ export class MainBodyComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   ];
 
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService) { }
 
   ngOnInit(): void {
     // console.log('on init');
@@ -164,6 +164,9 @@ export class MainBodyComponent implements OnInit, AfterViewInit, OnDestroy {
       (ind: number) => {
         this.currentSection = ind;
         this.gotoSection(ind);
+        // setTimeout(()=>{
+        // this.commonService.handleScroll = true;
+        // },1000)
       }
     );
   }
@@ -171,7 +174,17 @@ export class MainBodyComponent implements OnInit, AfterViewInit, OnDestroy {
   gotoSection(ind: number) {
     this.sectionList
       ?.get(ind)
-      ?.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      ?.nativeElement.scrollIntoView({ behavior: 'smooth' },);
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        console.log("Scrolling completed!");
+        this.commonService.handleScroll = true;
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(this.sectionList.get(ind)?.nativeElement);
   }
 
   checkScrollSection() {
@@ -230,9 +243,8 @@ export class MainBodyComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.buttonObj.style.transition = 'all 0.1s ease';
     this.buttonObj.style.transform = `translate(${ox}px, ${oy}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    this.buttonObj.style.boxShadow = `0px ${Math.abs(oy)}px ${
-      (Math.abs(oy) / radius) * 40
-    }px rgba(0,0,0,0.15)`;
+    this.buttonObj.style.boxShadow = `0px ${Math.abs(oy)}px ${(Math.abs(oy) / radius) * 40
+      }px rgba(0,0,0,0.15)`;
   }
 
   distanceBetween(p1x: number, p1y: number, p2x: number, p2y: number): number {

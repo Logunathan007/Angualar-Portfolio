@@ -5,9 +5,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class CommonService {
+ public handleScroll: boolean = true;
   constructor() {}
 
-  $updateCursor: Subject<boolean> = new Subject();
 
+  $updateCursor: Subject<boolean> = new Subject();
   $updateSelectedSection: Subject<number> = new Subject();
 }
